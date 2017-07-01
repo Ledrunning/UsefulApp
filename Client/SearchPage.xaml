@@ -1,0 +1,65 @@
+﻿<Window x:Class="Client.SearchPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Client"
+        mc:Ignorable="d"
+        Title="UsefulApp" Height="600" Width="650"
+        MinHeight="600" MinWidth="650" WindowStartupLocation="CenterOwner">
+    
+    <Grid OpacityMask="#FF423535">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0.5,0" EndPoint="1,1">
+                <GradientStop Color="LightBlue" Offset="0" />
+                <GradientStop Color="ForestGreen" Offset="0.3" />
+                <GradientStop Color="LightGreen" Offset="1" />
+            </LinearGradientBrush>
+        </Grid.Background>
+        <StackPanel Orientation="Horizontal" 
+
+        HorizontalAlignment="Center">
+            <Label Content="Элементы поиска" FontFamily="Comic Sans MS" FontWeight="Thin" FontSize="25" FontStretch="UltraExpanded" BorderBrush="Black"/>
+        </StackPanel>
+        <StackPanel>
+            <TextBox x:Name="searchBar" Text="{Binding ElementName=myTextBox,Path=Text}" Margin="100,50,100,0" 
+                     Background="Transparent" BorderThickness="1" BorderBrush="Green"></TextBox>
+        </StackPanel>
+        <StackPanel>
+            <Button Content="Найти" Margin="200,80,200,0" Background="Green" BorderBrush="Black" FontFamily="Comic Sans MS" Click="Button_Click"/>
+        </StackPanel>
+        <DataGrid x:Name="dataGrid" Grid.Row ="1" AlternatingRowBackground="LightGreen" RowBackground="LightGreen"
+                    HorizontalAlignment="Left" Margin="51,32,51,0" VerticalAlignment="Top" AutoGenerateColumns="True"  
+                    CanUserSortColumns="False" IsReadOnly="False" ColumnWidth="*" FontFamily="Comic Sans MS" />
+        
+        <Grid Grid.Row="2" >
+            <StackPanel Orientation="Horizontal" 
+
+            HorizontalAlignment="Center">
+                <Button Height="23" HorizontalAlignment="Left" Name="btnFirst" VerticalAlignment="Bottom" 
+                        Width="40" Content="&lt;&lt;" Click="btnFirst_Click" Opacity="0.75" Background="Green"/>
+                
+                <Button Height="23"  VerticalAlignment="Bottom" Name="btnPrev" Width="40" Click="btnPrev_Click" 
+                Opacity="0.75" Content="&lt;" Background="Green"/>
+
+                <Label x:Name="lblpageInformation" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="30" 
+                       Width="100" VerticalContentAlignment="Center" VerticalAlignment="Bottom" FontFamily="Comic Sans MS"/>
+                
+                <Button Height="23" HorizontalAlignment="Right" Name="btnNext" VerticalAlignment="Bottom" 
+                        Width="40" Content="&gt;" Click="btnNext_Click" Opacity="0.75" Background="Green"/>
+                
+                <Button Height="23" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="40" 
+                        Name="btnLast" Click="btnLast_Click" Opacity="0.75" Content="&gt;&gt;" Background="Green"/>
+                
+                <ComboBox x:Name="cbNumberOfRecords" Background="Green" HorizontalAlignment="Left"  VerticalAlignment="Bottom" 
+                          Width="120"  SelectedIndex="0" SelectionChanged="cbNumberOfRecords_SelectionChanged" Opacity="0.75"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
