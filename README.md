@@ -23,3 +23,4 @@ UsefulApp
 * Database search is not working
 * Context menu and comboboxes use standart windows theme
 * Events from server to client
+* Import from CSV to database
