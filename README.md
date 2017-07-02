@@ -6,7 +6,8 @@ UsefulApp
 
 * Simple WCF application 
 * Version 0.0.1
-* Three services: Weather (from openweather API), Currency converter (RU-US & US-RU) and Notes
+* Four services: Weather (from openweather API), Exchange currency service from RBK api,
+  Currency converter (RU-US & US-RU) and Notes
 * Storage of notes takes place in the database
 
 ![GitHub Logo](https://habrastorage.org/web/4d9/2ef/da2/4d92efda2bb94c89ab96db6ef9e5b8a0.png)
