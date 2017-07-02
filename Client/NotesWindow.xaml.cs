@@ -15,8 +15,7 @@ namespace Client
     public partial class NotesWindow : Window
     {
         //FactoryAndChannels factory = new FactoryAndChannels();
-        NoteServiceContractClient notesService = new NoteServiceContractClient();
-
+       
         GeneralContract.NotesData notesData = new GeneralContract.NotesData();
 
         /// <summary>
@@ -40,7 +39,10 @@ namespace Client
                         notesData.Header = header.Text;
                         notesData.Content = GetStringFromRtb(content);
                         //factory.CreateNotesFactory().Edit(notesData);
-                        notesService.Edit(notesData);
+                        using (NoteServiceContractClient notesService = new NoteServiceContractClient())
+                        {
+                            notesService.Edit(notesData);
+                        }
                     }));
 
                     this.Close();
@@ -61,7 +63,10 @@ namespace Client
                             notesData.Header = header.Text;
                             notesData.Content = GetStringFromRtb(content);
                             //factory.CreateNotesFactory().Add(notesData);
-                            notesService.Add(notesData);
+                            using (NoteServiceContractClient notesService = new NoteServiceContractClient())
+                            {
+                                notesService.Add(notesData);
+                            }
                         }));
 
                         this.Close();
@@ -134,7 +139,10 @@ namespace Client
                     notesObj.Content = "Content " + i;
                     notesObj.Time = (int)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalHours;
                 //factory.CreateNotesFactory().Add(notesObj);\
-                await notesService.AddAsync(notesObj);
+                using (NoteServiceContractClient notesService = new NoteServiceContractClient())
+                {
+                    await notesService.AddAsync(notesObj);
+                }
             }
         }
     }

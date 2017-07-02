@@ -5,30 +5,46 @@ using GeneralContract;
 using LumenWorks.Framework;
 using LumenWorks.Framework.IO.Csv;
 using System.IO;
+using Client.NotesService;
 
 namespace Client
 {
     class CSVFileParser
     {
-        List<NotesData> lst = new List<NotesData>();
-
-        public CachedCsvReader ReadCsv(string path)
+        public async void ReadData(string path)
         {
-            // open the file "data.csv" which is a CSV file with headers
-            using (var csv = new CachedCsvReader(new StreamReader(path), true))
-            {
-                // Field headers will automatically be used as column names
-                return csv;
-            }
-        }
+            string[] read;
+            char[] separators = { ',', '\t', '\n', '\r', '_' };
 
-
-        public IEnumerable<NotesData> GetAllNotes()
-        {
-            foreach (var item in lst)
+            using (StreamReader sr = new StreamReader(path))
             {
-                yield return item;
+                string data = sr.ReadLine();
+                NotesData nd = new NotesData();
+
+                try
+                {
+                    while ((data = sr.ReadLine()) != null)
+                    {
+                        read = data.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+                        nd.Id = Guid.Parse(read[0]);
+                        nd.Header = read[1].ToString();
+                        nd.Content = read[2].ToString();
+                        nd.Time = int.Parse(read[3]);
+                        using (NoteServiceContractClient notesService = new NoteServiceContractClient())
+                        {
+                            await notesService.AddAsync(nd);
+                        }
+                    }
+                }
+                catch(Exception err)
+                {
+                    throw new Exception("В базе уже существуют данные записи!" + err.Message);
+                }
+               
             }
+
+            
         }
+   
     }
 }

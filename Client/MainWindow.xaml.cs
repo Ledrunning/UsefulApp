@@ -12,6 +12,7 @@ using Client.ExchangeService;
 using Client.WeatherService;
 using Client.NotesService;
 using GeneralContract;
+using System.ServiceModel;
 
 namespace Client
 {
@@ -35,10 +36,9 @@ namespace Client
         /// </summary>
         public static Guid test;
 
+        //Needed when I use GeneralCOntracts without link to service;
         //FactoryAndChannels factory = new FactoryAndChannels();
-        //ExServiceContractClient currencyService = new ExServiceContractClient();
-        //WtServiceContractClient weatherService = new WtServiceContractClient();
-        NoteServiceContractClient notesService = new NoteServiceContractClient();
+        
 
         /// <summary>
         /// Main Window constructor
@@ -159,9 +159,9 @@ namespace Client
             try
             {
                 //ListOfNotes.ItemsSource = factory.CreateNotesFactory().GetAll();
-                using (NoteServiceContractClient notesService1 = new NoteServiceContractClient())
+                using (NoteServiceContractClient notesService = new NoteServiceContractClient())
                 {
-                    ListOfNotes.ItemsSource = await notesService1.GetAllAsync();
+                    ListOfNotes.ItemsSource = await notesService.GetAllAsync();
                 }
             }
             catch (Exception err)
@@ -212,14 +212,17 @@ namespace Client
         /// <param name="e"></param>
         private async void NotesRepository_Changed(object sender, EventArgs e)
         {
-            try
+            using (NoteServiceContractClient notesService = new NoteServiceContractClient())
             {
-                //ListOfNotes.ItemsSource = factory.CreateNotesFactory().GetAll();
-                ListOfNotes.ItemsSource = await notesService.GetAllAsync();
-            }
-            catch (Exception ex)
-            {
-                ShowError(ex.Message);
+                try
+                {
+                    //ListOfNotes.ItemsSource = factory.CreateNotesFactory().GetAll();
+                    ListOfNotes.ItemsSource = await notesService.GetAllAsync();
+                }
+                catch (Exception ex)
+                {
+                    ShowError(ex.Message);
+                }
             }
         }
 
@@ -268,13 +271,26 @@ namespace Client
             of.Filter = "CSV Files(*.csv)|*.csv|All(*.*)|*";
 
             if (of.ShowDialog() == true)
-                return;
+            //return;
+            {
+                string filename = of.FileName;
+                string fileText = System.IO.File.ReadAllText(filename);
+                CSVFileParser csParse = new CSVFileParser();
 
-            string filename = of.FileName;
-            string fileText = System.IO.File.ReadAllText(filename);
-            CSVFileParser csParse = new CSVFileParser();
-            //ListOfNotes.DataContext = csParse.ReadCsv(filename);
-            
+                try
+                {
+                    csParse.ReadData(filename);
+                }
+                catch (FaultException fex)
+                {
+                    ShowError(fex.Message);
+                }
+                catch (Exception err)
+                {
+                    ShowError(err.Message);
+                }
+            }
+            else return;
         }
 
         private async void ExportCsvMenuItem_Click(object sender, RoutedEventArgs e)
@@ -283,7 +299,12 @@ namespace Client
             //var rdDataFromDB = factory.CreateNotesFactory().GetAll();
             //List<NotesData> rdDataFromDB = new List<NotesData>();
 
-            NotesData[] rdDataFromDB = await notesService.GetAllAsync();
+            NotesData[] rdDataFromDB;
+
+            using (NoteServiceContractClient notesService = new NoteServiceContractClient())
+            {
+                rdDataFromDB = await notesService.GetAllAsync();
+            }
 
             SaveFile sf = new SaveFile();
             SaveFileDialog safeFile = new SaveFileDialog();
@@ -340,26 +361,33 @@ namespace Client
         {
             Guid selectedId = ((NotesData)ListOfNotes.SelectedItem).Id;
             //factory.CreateNotesFactory().DeleteNote(selectedId);
-            try
+            using (NoteServiceContractClient notesService = new NoteServiceContractClient())
             {
-                notesService.DeleteNoteAsync(selectedId);
-            }
-            catch(Exception err)
-            {
-                ShowError(err.Message);
+                try
+                {
+                    notesService.DeleteNoteAsync(selectedId);
+                }
+                catch (Exception err)
+                {
+                    ShowError(err.Message);
+                }
             }
         }
 
         private void DeleteAllMenuItem_Click(object sender, RoutedEventArgs e)
         {
             //factory.CreateNotesFactory().DeleteAll();
-            try
+            using (NoteServiceContractClient notesService = new NoteServiceContractClient())
             {
-                notesService.DeleteAllAsync();
-            }
-            catch(Exception err)
-            {
-                ShowError(err.Message);
+
+                try
+                {
+                    notesService.DeleteAllAsync();
+                }
+                catch (Exception err)
+                {
+                    ShowError(err.Message);
+                }
             }
         }
 
@@ -407,8 +435,6 @@ namespace Client
                 ShowError("Таблица пуста! " + err.Message);
             }
         }
-
-
 
         #endregion
 
