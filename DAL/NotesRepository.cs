@@ -2,66 +2,25 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL
 {
     public class NotesRepository
     {
-
-        //public static event EventHandler OnChanged = delegate { };
-
         /// <summary>
-        /// Add data to the default database
+        ///     Add data to the default database
         /// </summary>
-        /// <param name="ne"></param>
-        public void Add(NoteEntity ne)
+        /// <param name="noteEntity"></param>
+        public void Add(NoteEntity noteEntity)
         {
-            using(DataBaseContext dbcon = new DataBaseContext())
+            using (var dbcon = new DataBaseContext())
             {
                 try
                 {
-                    dbcon.Notes.Add(ne);
+                    dbcon.Notes.Add(noteEntity);
                     dbcon.SaveChanges();
                 }
                 catch (Exception err)
-                {
-                   throw new Exception(err.Message);
-                }
-
-            }
-           
-        }
-
-        /// <summary>
-        /// Method where note gets by ID
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public List<NoteEntity> GetById(Guid id)
-        {
-            using (DataBaseContext dbcon = new DataBaseContext())
-            {
-                NoteEntity nt = new NoteEntity();
-                var getNote = dbcon.Notes.Where(i => i.Id == nt.Id);
-                return dbcon.Notes.ToList();
-            }
-        }
-
-        /// <summary>
-        /// Get all data from database table
-        /// </summary>
-        /// <returns></returns>
-        public List<NoteEntity> GetAll()
-        {
-            using (DataBaseContext dbcon = new DataBaseContext())
-            {
-                try
-                {
-                    return dbcon.Notes.ToList();
-                }
-                catch(Exception err)
                 {
                     throw new Exception(err.Message);
                 }
@@ -69,60 +28,91 @@ namespace DAL
         }
 
         /// <summary>
-        /// Search by Id and content
+        ///     Method where note gets by ID
         /// </summary>
-        /// <param name="nt"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public List<NoteEntity> SearchBy(NoteEntity nt)
+        public List<NoteEntity> GetById(Guid id)
         {
-            using (DataBaseContext dbcon = new DataBaseContext())
+            using (var dbcon = new DataBaseContext())
             {
-                var searchdNote = dbcon.Notes.Where(i => i.Id == nt.Id).OrderBy(i => i.Content);
+                var nt = new NoteEntity();
+                var getNote = dbcon.Notes.Where(i => i.Id == nt.Id);
+                return dbcon.Notes.ToList();
+            }
+        }
+
+        /// <summary>
+        ///     Get all data from database table
+        /// </summary>
+        /// <returns></returns>
+        public List<NoteEntity> GetAll()
+        {
+            using (var dbcon = new DataBaseContext())
+            {
+                try
+                {
+                    return dbcon.Notes.ToList();
+                }
+                catch (Exception err)
+                {
+                    throw new Exception(err.Message);
+                }
+            }
+        }
+
+        /// <summary>
+        ///     Search by Id and content
+        /// </summary>
+        /// <param name="notesEntity"></param>
+        /// <returns></returns>
+        public List<NoteEntity> SearchBy(NoteEntity notesEntity)
+        {
+            using (var dbcon = new DataBaseContext())
+            {
+                var searchdNote = dbcon.Notes.Where(i => i.Id == notesEntity.Id).OrderBy(i => i.Content);
                 dbcon.SaveChanges();
                 return dbcon.Notes.ToList();
             }
         }
 
         /// <summary>
-        /// Edit selected entry
+        ///     Edit selected entry
         /// </summary>
-        /// <param name="nt"></param>
-        public void Edit(NoteEntity nt)
+        /// <param name="notesEntity"></param>
+        public void Edit(NoteEntity notesEntity)
         {
-            using (DataBaseContext dbcon = new DataBaseContext())
+            using (var dbcon = new DataBaseContext())
             {
-                NoteEntity noteToUpdate = dbcon.Notes.FirstOrDefault(n => n.Id == nt.Id);
+                var noteToUpdate = dbcon.Notes.FirstOrDefault(n => n.Id == notesEntity.Id);
 
                 if (noteToUpdate != null)
                 {
                     //noteToUpdate.Id = Guid.Parse("689f5ab7-f779-4df3-bece-1aaaa64f8ddf");
-                    noteToUpdate.Header = nt.Header;
-                    noteToUpdate.Content = nt.Content;
+                    noteToUpdate.Header = notesEntity.Header;
+                    noteToUpdate.Content = notesEntity.Content;
                     dbcon.Entry(noteToUpdate).State = EntityState.Modified;
                     dbcon.SaveChanges();
                 }
                 else
                 {
-                     throw new Exception(string.Format("Заметка с Id = '{0}' отсутствует {1}!", nt.Id, nt.Header));
+                    throw new Exception(string.Format("Заметка с Id = '{0}' отсутствует {1}!", notesEntity.Id, notesEntity.Header));
                 }
-
-                //OnChanged.Invoke(null, new EventArgs());
-
             }
-
         }
 
         /// <summary>
-        /// Delete selected note
+        ///     Delete selected note
         /// </summary>
         /// <param name="id"></param>
+        /// <exception cref="Exception"></exception>
         public void DeleteNote(Guid id)
         {
-            using (DataBaseContext dbcon = new DataBaseContext())
+            using (var dbcon = new DataBaseContext())
             {
                 try
                 {
-                    NoteEntity noteToRemove = new NoteEntity
+                    var noteToRemove = new NoteEntity
                     {
                         Id = id
                     };
@@ -130,23 +120,21 @@ namespace DAL
                     dbcon.Notes.Remove(noteToRemove);
                     dbcon.SaveChanges();
                 }
-                catch(Exception err)
+                catch (Exception err)
                 {
                     throw new Exception(string.Format("Заметка не существует или удалена!" + err.Message));
                 }
 
                 //OnChanged.Invoke(null, new EventArgs());
-
             }
-
         }
 
         /// <summary>
-        /// Delete all entries in database table
+        ///     Delete all entries in database table
         /// </summary>
         public void DeleteAll()
         {
-            using (DataBaseContext dbcon = new DataBaseContext())
+            using (var dbcon = new DataBaseContext())
             {
                 var all = dbcon.Notes;
                 try
@@ -154,15 +142,13 @@ namespace DAL
                     dbcon.Notes.RemoveRange(all);
                     dbcon.SaveChanges();
                 }
-                catch(Exception err)
+                catch (Exception err)
                 {
                     throw new Exception(string.Format("Заметки пусты!" + err.Message));
                 }
 
                 //OnChanged.Invoke(null, new EventArgs());
             }
-
         }
     }
 }
-
