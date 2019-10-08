@@ -52,7 +52,7 @@ namespace Client
                 {
                     if (string.IsNullOrWhiteSpace(header.Text) && string.IsNullOrWhiteSpace(GetStringFromRtb(content)))
                     {
-                        ShowError(UserNotifications.FILL_ALL_FIELDS);
+                        ShowError(UserNotifications.FillAllFields);
                     }
                     else
                     {
@@ -76,7 +76,7 @@ namespace Client
 
             catch (Exception err)
             {
-                ShowError(err, UserNotifications.ERROR);
+                ShowError(err, UserNotifications.Error);
             }
         }
 
@@ -107,7 +107,7 @@ namespace Client
         /// <param name="err"></param>
         public void ShowError(string err)
         {
-            MessageBox.Show(err, UserNotifications.NO_ENTRY_SELECTED, MessageBoxButton.OK, MessageBoxImage.Warning);
+            MessageBox.Show(err, UserNotifications.NoEntrySelected, MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         /// <summary>

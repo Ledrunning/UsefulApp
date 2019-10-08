@@ -1,25 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.ServiceModel;
-using System.ServiceModel.Description;
 using TotalContract;
 
 namespace NoteService
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Console.Title = "Сервис Заметки";
             Console.ForegroundColor = ConsoleColor.Green;
 
-            Uri address = new Uri("net.tcp://127.0.0.1:6002/Icontract");
-            NetTcpBinding binding = new NetTcpBinding();
-            Type contract = typeof(INoteServiceContract);
-            ServiceHost host = new ServiceHost(typeof(Notes));
+            var address = new Uri("net.tcp://127.0.0.1:6002/Icontract");
+            var binding = new NetTcpBinding();
+            var contract = typeof(INoteServiceContract);
+            var host = new ServiceHost(typeof(Notes));
             host.AddServiceEndpoint(contract, binding, address);
             //host.Description.Behaviors.Add(new ServiceMetadataBehavior());
             //host.AddServiceEndpoint(typeof(IMetadataExchange), MetadataExchangeBindings.CreateMexTcpBinding(), "net.tcp://127.0.0.1:6002/Icontract/mex");
@@ -27,16 +22,15 @@ namespace NoteService
             try
             {
                 host.Open();
-                Console.WriteLine("Сервис с адресом {0} запущен!", address);
+                Console.WriteLine($"Сервис с адресом {address} запущен!");
             }
-            catch(Exception err)
+            catch (Exception err)
             {
                 Console.WriteLine(err.Message);
                 host.Close();
             }
 
             Console.ReadKey();
-
         }
     }
 }

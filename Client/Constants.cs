@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Client
+﻿namespace Client
 {
     public static class Constants
     {
-        public const short DATAGRID_SIZE = 3;
-        public const string RU = " RU";
-        public const string US = " US";
-        public const string PRINT_ZERO_VALUE = "0";
+        public const short DataGridSize = 3;
+        public const string Ru = " RU";
+        public const string Us = " US";
+        public const string ZeroValue = "0";
     }
 }

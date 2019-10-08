@@ -1,47 +1,46 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.IO;
-using Microsoft.Win32; // Это для OpenFileDialog; 
-using DAL;
-using System.Collections.Generic;
-using System.Data;
 using System.Windows.Threading;
-using System.ServiceModel;
 using Client.Service_References.ExchangeService;
 using Client.Service_References.NotesService;
 using Client.Service_References.RbcService;
 using Client.Service_References.WeatherService;
+using Microsoft.Win32;
 using TotalContract;
+// Это для OpenFileDialog; 
 
 namespace Client
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
-    /// For wcf please include link to System.ServiceModel
-    /// GeneralContract is a class library .dll
-    /// To use migration use enable-migrations 
-    /// command in Packet Manager Consol 
-    /// Use command: Enable-Migrations -ProjectName "DAL" -StartUpProjectName "NoteService"
-    /// Then put this command in console line Add-Migration FirstMigration -ProjectName "DAL" -StartUpProjectName "NoteService"  
-    /// And Update-Database -ProjectName "DAL" -StartUpProjectName "NoteService" 
+    ///     Логика взаимодействия для MainWindow.xaml
+    ///     For wcf please include link to System.ServiceModel
+    ///     GeneralContract is a class library .dll
+    ///     To use migration use enable-migrations
+    ///     command in Packet Manager Consol
+    ///     Use command: Enable-Migrations -ProjectName "DAL" -StartUpProjectName "NoteService"
+    ///     Then put this command in console line Add-Migration FirstMigration -ProjectName "DAL" -StartUpProjectName
+    ///     "NoteService"
+    ///     And Update-Database -ProjectName "DAL" -StartUpProjectName "NoteService"
     /// </summary>
     public partial class MainWindow : Window
     {
-        
-        private decimal money = 0;
-       
         /// <summary>
-        /// Static var for NotesWindow
+        ///     Static var for NotesWindow
         /// </summary>
         public static Guid test;
 
+        private decimal money;
+
         //Needed when I use GeneralCOntracts without link to service;
         //FactoryAndChannels factory = new FactoryAndChannels();
-        
+
 
         /// <summary>
-        /// Main Window constructor
+        ///     Main Window constructor
         /// </summary>
         public MainWindow()
         {
@@ -54,7 +53,7 @@ namespace Client
         #region Service methods
 
         /// <summary>
-        /// Method working with RBC Api to get actual rates
+        ///     Method working with RBC Api to get actual rates
         /// </summary>
         private async void GetRbcExchangeRates()
         {
@@ -63,12 +62,12 @@ namespace Client
             //Vcurs - Курс
             //Vcode - ISO Цифровой код валюты
             //VchCode - ISO Символьный код валюты
-            List<string> lst = new List<string>();
-            DailyInfoSoapClient client = new DailyInfoSoapClient();
+            var lst = new List<string>();
+            var client = new DailyInfoSoapClient();
 
             try
             {
-                DataSet response = await client.GetCursOnDateAsync(DateTime.Now);
+                var response = await client.GetCursOnDateAsync(DateTime.Now);
                 rbcCurrency.DataContext = response.Tables["ValuteCursOnDate"];
             }
             catch (Exception err)
@@ -78,7 +77,7 @@ namespace Client
         }
 
         /// <summary>
-        /// Simple currency converter
+        ///     Simple currency converter
         /// </summary>
         private async void CurrencyCalculate()
         {
@@ -86,24 +85,20 @@ namespace Client
             ResetCurrencyToZero();
             try
             {
-                bool isMoneyValueRigth = Decimal.TryParse(moneyValue.Text, out tempMoney);
-                if (isMoneyValueRigth)
-                {
-                    money = tempMoney;
-                }
+                var isMoneyValueRigth = decimal.TryParse(moneyValue.Text, out tempMoney);
+                if (isMoneyValueRigth) money = tempMoney;
 
                 //decimal result = factory.CreateExchangeFactory().Get(money, chooseCurrency.Text, toCurrency.Text);
-                using (ExServiceContractClient currencyService = new ExServiceContractClient())
+                using (var currencyService = new ExServiceContractClient())
                 {
-                    decimal result = await currencyService.GetAsync(money, chooseCurrency.Text, toCurrency.Text);
+                    var result = await currencyService.GetAsync(money, chooseCurrency.Text, toCurrency.Text);
                     if (toCurrency.Text == "Рубль")
-                        currency.Text = result.ToString() + Constants.RU;
+                        currency.Text = result + Constants.Ru;
                     else if (toCurrency.Text == "Доллар")
-                        currency.Text = result.ToString() + Constants.US;
+                        currency.Text = result + Constants.Us;
                     else
                         currency.Text = result.ToString();
                 }
-                                
             }
             catch (Exception err)
             {
@@ -115,35 +110,34 @@ namespace Client
         {
             if (string.IsNullOrWhiteSpace(moneyValue.Text) || string.IsNullOrEmpty(moneyValue.Text))
             {
-                currency.Text = Constants.PRINT_ZERO_VALUE;
+                currency.Text = Constants.ZeroValue;
                 money = 0;
             }
         }
 
         /// <summary>
-        /// Test method
+        ///     Test method
         /// </summary>
         private void LoadCurrency()
         {
             if (string.IsNullOrWhiteSpace(moneyValue.Text) || string.IsNullOrEmpty(moneyValue.Text))
-                currency.Text = Constants.PRINT_ZERO_VALUE;
+                currency.Text = Constants.ZeroValue;
         }
 
         /// <summary>
-        /// Get weather from API
+        ///     Get weather from API
         /// </summary>
         private async void GetWeather()
         {
             try
             {
                 //string result = factory.CreateWeatherFactory().GetWeatherFromOpenWeatherApi();
-                using (WtServiceContractClient weatherService = new WtServiceContractClient())
+                using (var weatherService = new WtServiceContractClient())
                 {
-                    string getWeather = await weatherService.GetWeatherFromOpenWeatherApiAsync();
+                    var getWeather = await weatherService.GetWeatherFromOpenWeatherApiAsync();
                     //weather.Text = result.ToString();
-                    weather.Text = getWeather.ToString();
+                    weather.Text = getWeather;
                 }
-                   
             }
             catch (Exception err)
             {
@@ -152,14 +146,14 @@ namespace Client
         }
 
         /// <summary>
-        /// Get notes from Notes service
+        ///     Get notes from Notes service
         /// </summary>
         private async void GetNotes()
         {
             try
             {
                 //ListOfNotes.ItemsSource = factory.CreateNotesFactory().GetAll();
-                using (NoteServiceContractClient notesService = new NoteServiceContractClient())
+                using (var notesService = new NoteServiceContractClient())
                 {
                     ListOfNotes.ItemsSource = await notesService.GetAllAsync();
                 }
@@ -172,47 +166,51 @@ namespace Client
 
         private void OpenNotesDialog()
         {
-            NotesWindow notes = new NotesWindow();
+            var notes = new NotesWindow();
             notes.Owner = this;
             //notes.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterOwner;
             notes.ShowDialog();
         }
+
         #endregion
 
         #region Service methods
+
         /// <summary>
-        /// Method for Warnings and errors to show to users
+        ///     Method for Warnings and errors to show to users
         /// </summary>
         /// <param name="err"></param>
         public void ShowError(string err)
         {
-            MessageBox.Show(err, UserNotifications.ERROR, MessageBoxButton.OK, MessageBoxImage.Warning);
+            MessageBox.Show(err, UserNotifications.Error, MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         /// <summary>
-        /// Getting time from system
+        ///     Getting time from system
         /// </summary>
         private void GetTime()
         {
-            DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
+            var timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
-                this.time.Content = DateTime.Now.ToString("HH:mm:ss");
+                time.Content = DateTime.Now.ToString("HH:mm:ss");
                 // this.
-            }, this.Dispatcher);
+            }, Dispatcher);
 
             date.Content = DateTime.Now.ToShortDateString();
         }
+
         #endregion
 
         #region TabControl, buttons etc handlers
+
         /// <summary>
-        /// Test Event 
+        ///     Test Event
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private async void NotesRepository_Changed(object sender, EventArgs e)
         {
-            using (NoteServiceContractClient notesService = new NoteServiceContractClient())
+            using (var notesService = new NoteServiceContractClient())
             {
                 try
                 {
@@ -229,25 +227,25 @@ namespace Client
 
         private void chooseCurrency_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-             CurrencyCalculate();
+            CurrencyCalculate();
         }
 
         private void toCurrency_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-               CurrencyCalculate();
+            CurrencyCalculate();
         }
 
         private void moneyValue_TextChanged(object sender, TextChangedEventArgs e)
         {
-               CurrencyCalculate();
+            CurrencyCalculate();
         }
 
         private void chooseCity_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-           GetWeather();
+            GetWeather();
         }
 
-    
+
         private void addNote_Click(object sender, RoutedEventArgs e)
         {
             OpenNotesDialog();
@@ -260,22 +258,21 @@ namespace Client
 
         private void rbcCurrency_Loaded(object sender, RoutedEventArgs e)
         {
-
         }
 
         private void ImportCsvMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog of = new OpenFileDialog();
-            NotesData nd = new NotesData();
+            var of = new OpenFileDialog();
+            var nd = new NotesData();
             //CSVFileParser parser = new CSVFileParser(path);
             of.Filter = "CSV Files(*.csv)|*.csv|All(*.*)|*";
 
             if (of.ShowDialog() == true)
-            //return;
+                //return;
             {
-                string filename = of.FileName;
-                string fileText = System.IO.File.ReadAllText(filename);
-                CSVFileParser csParse = new CSVFileParser();
+                var filename = of.FileName;
+                var fileText = File.ReadAllText(filename);
+                var csParse = new CSVFileParser();
 
                 try
                 {
@@ -290,24 +287,22 @@ namespace Client
                     ShowError(err.Message);
                 }
             }
-            else return;
         }
 
         private async void ExportCsvMenuItem_Click(object sender, RoutedEventArgs e)
         {
-
             //var rdDataFromDB = factory.CreateNotesFactory().GetAll();
             //List<NotesData> rdDataFromDB = new List<NotesData>();
 
             NotesData[] rdDataFromDB;
 
-            using (NoteServiceContractClient notesService = new NoteServiceContractClient())
+            using (var notesService = new NoteServiceContractClient())
             {
                 rdDataFromDB = await notesService.GetAllAsync();
             }
 
-            SaveFile sf = new SaveFile();
-            SaveFileDialog safeFile = new SaveFileDialog();
+            var sf = new SaveFile();
+            var safeFile = new SaveFileDialog();
             safeFile.Filter = "CSV Files(*.csv)|*.csv|All(*.*)|*";
             safeFile.RestoreDirectory = true;
             safeFile.InitialDirectory = "c:\\";
@@ -324,7 +319,7 @@ namespace Client
 
         private void Search_Click(object sender, RoutedEventArgs e)
         {
-            SearchPage searchPage = new SearchPage();
+            var searchPage = new SearchPage();
             searchPage.Owner = this;
             searchPage.ShowDialog();
         }
@@ -334,8 +329,8 @@ namespace Client
 
         #region DataGrid Handlers and methods
 
-        int selectedColumn = 0;
-        bool selectTrue = false;
+        private int selectedColumn;
+        private bool selectTrue;
 
         private void grid_Loaded(object sender, RoutedEventArgs e)
         {
@@ -359,9 +354,9 @@ namespace Client
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            Guid selectedId = ((NotesData)ListOfNotes.SelectedItem).Id;
+            var selectedId = ((NotesData) ListOfNotes.SelectedItem).Id;
             //factory.CreateNotesFactory().DeleteNote(selectedId);
-            using (NoteServiceContractClient notesService = new NoteServiceContractClient())
+            using (var notesService = new NoteServiceContractClient())
             {
                 try
                 {
@@ -377,9 +372,8 @@ namespace Client
         private void DeleteAllMenuItem_Click(object sender, RoutedEventArgs e)
         {
             //factory.CreateNotesFactory().DeleteAll();
-            using (NoteServiceContractClient notesService = new NoteServiceContractClient())
+            using (var notesService = new NoteServiceContractClient())
             {
-
                 try
                 {
                     notesService.DeleteAllAsync();
@@ -397,13 +391,13 @@ namespace Client
             {
                 if (selectTrue)
                 {
-                    NotesWindow notesWindow = new NotesWindow();
+                    var notesWindow = new NotesWindow();
 
                     var selectedCell = ListOfNotes.SelectedCells[selectedColumn];
                     var cellContent = selectedCell.Column.GetCellContent(selectedCell.Item);
-                    NotesData notesData = new NotesData();
+                    var notesData = new NotesData();
 
-                    for (int i = 0; i < Constants.DATAGRID_SIZE; i++)
+                    for (var i = 0; i < Constants.DataGridSize; i++)
                     {
                         selectedCell = ListOfNotes.SelectedCells[i];
                         cellContent = selectedCell.Column.GetCellContent(selectedCell.Item);
@@ -421,22 +415,22 @@ namespace Client
                             case 2:
                                 notesWindow.content.AppendText((cellContent as TextBlock).Text);
                                 break;
-
                         }
-
                     }
+
                     notesWindow.Show();
                 }
                 else
-                    ShowError(UserNotifications.NO_ENTRY_SELECTED);
+                {
+                    ShowError(UserNotifications.NoEntrySelected);
+                }
             }
-           catch(Exception err)
+            catch (Exception err)
             {
                 ShowError("Таблица пуста! " + err.Message);
             }
         }
 
         #endregion
-
     }
 }

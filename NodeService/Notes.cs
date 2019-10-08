@@ -9,12 +9,12 @@ namespace NoteService
 {
     public class Notes : INoteServiceContract
     {
-        public void Add(NotesData nd)
+        public void Add(NotesData data)
         {
             var nr = new NotesRepository();
             try
             {
-                nr.Add(new NoteEntity {Id = nd.Id, Header = nd.Header, Content = nd.Content, Time = nd.Time});
+                nr.Add(new NoteEntity {Id = data.Id, Header = data.Header, Content = data.Content, Time = data.Time});
             }
             catch (Exception err)
             {
@@ -62,13 +62,13 @@ namespace NoteService
             }
         }
 
-        public void Edit(NotesData nd)
+        public void Edit(NotesData data)
         {
             var nr = new NotesRepository();
             //DAL.NotesRepository.Edit(new DAL.NoteEntity() { Id = nd.Id, Header = nd.Header, Content = nd.Content });
             try
             {
-                nr.Edit(new NoteEntity {Id = nd.Id, Header = nd.Header, Content = nd.Content});
+                nr.Edit(new NoteEntity {Id = data.Id, Header = data.Header, Content = data.Content});
             }
             catch (Exception err)
             {
