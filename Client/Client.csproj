@@ -314,9 +314,6 @@
     <None Include="Resources\newsearch.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\nsearch.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="UsefullIco.ico" />
   </ItemGroup>
   <ItemGroup>
