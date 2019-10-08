@@ -8,7 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Client.NotesService {
+using TotalContract;
+
+namespace Client.Service_References.NotesService {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -16,10 +18,10 @@ namespace Client.NotesService {
     public interface INoteServiceContract {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INoteServiceContract/Add", ReplyAction="http://tempuri.org/INoteServiceContract/AddResponse")]
-        void Add(GeneralContract.NotesData nd);
+        void Add(NotesData nd);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INoteServiceContract/Add", ReplyAction="http://tempuri.org/INoteServiceContract/AddResponse")]
-        System.Threading.Tasks.Task AddAsync(GeneralContract.NotesData nd);
+        System.Threading.Tasks.Task AddAsync(NotesData nd);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INoteServiceContract/GetById", ReplyAction="http://tempuri.org/INoteServiceContract/GetByIdResponse")]
         void GetById(System.Guid id);
@@ -28,10 +30,10 @@ namespace Client.NotesService {
         System.Threading.Tasks.Task GetByIdAsync(System.Guid id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INoteServiceContract/GetAll", ReplyAction="http://tempuri.org/INoteServiceContract/GetAllResponse")]
-        GeneralContract.NotesData[] GetAll();
+        NotesData[] GetAll();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INoteServiceContract/GetAll", ReplyAction="http://tempuri.org/INoteServiceContract/GetAllResponse")]
-        System.Threading.Tasks.Task<GeneralContract.NotesData[]> GetAllAsync();
+        System.Threading.Tasks.Task<NotesData[]> GetAllAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INoteServiceContract/SearchBy", ReplyAction="http://tempuri.org/INoteServiceContract/SearchByResponse")]
         string SearchBy();
@@ -46,10 +48,10 @@ namespace Client.NotesService {
         System.Threading.Tasks.Task DeleteNoteAsync(System.Guid id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INoteServiceContract/Edit", ReplyAction="http://tempuri.org/INoteServiceContract/EditResponse")]
-        void Edit(GeneralContract.NotesData nt);
+        void Edit(NotesData nt);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INoteServiceContract/Edit", ReplyAction="http://tempuri.org/INoteServiceContract/EditResponse")]
-        System.Threading.Tasks.Task EditAsync(GeneralContract.NotesData nt);
+        System.Threading.Tasks.Task EditAsync(NotesData nt);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INoteServiceContract/DeleteAll", ReplyAction="http://tempuri.org/INoteServiceContract/DeleteAllResponse")]
         void DeleteAll();
@@ -59,12 +61,12 @@ namespace Client.NotesService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface INoteServiceContractChannel : Client.NotesService.INoteServiceContract, System.ServiceModel.IClientChannel {
+    public interface INoteServiceContractChannel : INoteServiceContract, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class NoteServiceContractClient : System.ServiceModel.ClientBase<Client.NotesService.INoteServiceContract>, Client.NotesService.INoteServiceContract {
+    public partial class NoteServiceContractClient : System.ServiceModel.ClientBase<INoteServiceContract>, INoteServiceContract {
         
         public NoteServiceContractClient() {
         }
@@ -85,11 +87,11 @@ namespace Client.NotesService {
                 base(binding, remoteAddress) {
         }
         
-        public void Add(GeneralContract.NotesData nd) {
+        public void Add(NotesData nd) {
             base.Channel.Add(nd);
         }
         
-        public System.Threading.Tasks.Task AddAsync(GeneralContract.NotesData nd) {
+        public System.Threading.Tasks.Task AddAsync(NotesData nd) {
             return base.Channel.AddAsync(nd);
         }
         
@@ -101,11 +103,11 @@ namespace Client.NotesService {
             return base.Channel.GetByIdAsync(id);
         }
         
-        public GeneralContract.NotesData[] GetAll() {
+        public NotesData[] GetAll() {
             return base.Channel.GetAll();
         }
         
-        public System.Threading.Tasks.Task<GeneralContract.NotesData[]> GetAllAsync() {
+        public System.Threading.Tasks.Task<NotesData[]> GetAllAsync() {
             return base.Channel.GetAllAsync();
         }
         
@@ -125,11 +127,11 @@ namespace Client.NotesService {
             return base.Channel.DeleteNoteAsync(id);
         }
         
-        public void Edit(GeneralContract.NotesData nt) {
+        public void Edit(NotesData nt) {
             base.Channel.Edit(nt);
         }
         
-        public System.Threading.Tasks.Task EditAsync(GeneralContract.NotesData nt) {
+        public System.Threading.Tasks.Task EditAsync(NotesData nt) {
             return base.Channel.EditAsync(nt);
         }
         

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GeneralContract;
 using System.ServiceModel;
 using System.ServiceModel.Description;
+using TotalContract;
 
 namespace ExchangeService
 {

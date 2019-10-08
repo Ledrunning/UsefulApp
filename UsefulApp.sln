@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.779
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExchangeService", "ExchangeService\ExchangeService.csproj", "{AB5536E0-E6EC-478B-B331-24E62350295C}"
 EndProject
@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherService", "WetherSer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoteService", "NodeService\NoteService.csproj", "{778FF925-DD00-4E22-8411-2E38F6C8EE0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeneralContract", "TotalContract\GeneralContract.csproj", "{3DB915C8-2D22-4A9B-B6B8-2015F98E4A1C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TotalContract", "TotalContract\TotalContract.csproj", "{3DB915C8-2D22-4A9B-B6B8-2015F98E4A1C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{BA4D2965-0C75-4633-8DE9-46ABBCD3BFEC}"
 EndProject
@@ -54,5 +54,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B7681FED-F9B7-4A4F-8A42-EBCF25A2E685}
 	EndGlobalSection
 EndGlobal

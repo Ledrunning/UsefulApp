@@ -1,43 +1,42 @@
-﻿using Microsoft.Win32;
-using GeneralContract;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
+using System.Text;
+using Microsoft.Win32;
+using TotalContract;
 
 namespace Client
 {
     /// <summary>
-    /// Class for saving files and openfile dialog
+    ///     Class for saving files and openfile dialog
     /// </summary>
     public class SaveFile
     {
-        private string CurrentFile { get; set; }
-
         /// <summary>
-        /// Default constructor
+        ///     Default constructor
         /// </summary>
         public SaveFile()
         {
-
         }
 
         /// <summary>
-        /// Constructor get the string value with file path
+        ///     Constructor get the string value with file path
         /// </summary>
         /// <param name="currentFile"></param>
         public SaveFile(string currentFile)
         {
-            this.CurrentFile = currentFile;
+            CurrentFile = currentFile;
         }
 
+        private string CurrentFile { get; }
+
         /// <summary>
-        /// Get path from dialog
+        ///     Get path from dialog
         /// </summary>
         /// <returns></returns>
         public string GetPath()
         {
             if (string.IsNullOrEmpty(CurrentFile))
             {
-                SaveFileDialog dialog = new SaveFileDialog();
+                var dialog = new SaveFileDialog();
                 dialog.Filter = "CSV Files(*.csv)|*.csv|All(*.*)|*";
                 dialog.RestoreDirectory = true;
                 dialog.InitialDirectory = dialog.FileName;
@@ -50,33 +49,30 @@ namespace Client
         }
 
         /// <summary>
-        /// OpenFile diolog method
+        ///     OpenFile diolog method
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="d"></param>
-        public void OpenFileDialog(NotesData[] a, SaveFileDialog d)
+        /// <param name="data"></param>
+        /// <param name="dialog"></param>
+        public void OpenFileDialog(NotesData[] data, SaveFileDialog dialog)
         {
-
-            if (d.ShowDialog() == true)
+            if (dialog.ShowDialog() == true)
             {
-
-                string path = d.FileName;
-                StreamWriter sw = new StreamWriter(path, true, System.Text.Encoding.GetEncoding(1251));
-                using (sw)
+                var path = dialog.FileName;
+                var streamWriter = new StreamWriter(path, true, Encoding.GetEncoding(1251));
+                using (streamWriter)
                 {
-                    foreach (var item in a)
+                    foreach (var item in data)
                     {
-                        sw.Write(item.Id + ",");
-                        sw.Write(item.Header + ",");
-                        sw.Write(item.Content + ",");
-                        sw.Write(item.Time + ",");
-                        sw.WriteLine();
+                        streamWriter.Write(item.Id + ",");
+                        streamWriter.Write(item.Header + ",");
+                        streamWriter.Write(item.Content + ",");
+                        streamWriter.Write(item.Time + ",");
+                        streamWriter.WriteLine();
                     }
 
-                    d.RestoreDirectory = true;
-                    sw.Close();
+                    dialog.RestoreDirectory = true;
+                    streamWriter.Close();
                 }
-
             }
         }
     }

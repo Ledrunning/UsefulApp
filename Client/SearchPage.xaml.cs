@@ -3,28 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using DAL;
-using GeneralContract;
-
 
 namespace Client
 {
     /// <summary>
-    /// Логика взаимодействия для SearchPage.xaml
+    ///     Логика взаимодействия для SearchPage.xaml
     /// </summary>
     public partial class SearchPage : Window
     {
-        int pageIndex = 1;
+        private FactoryAndChannels fc = new FactoryAndChannels();
+        private List<object> myList = new List<object>();
         private int numberOfRecPerPage;
-        //To check the paging direction according to use selection.
-        private enum PagingMode
-        { First = 1, Next = 2, Previous = 3, Last = 4, PageCountChange = 5 };
-        FactoryAndChannels fc = new FactoryAndChannels();
-
-        List<object> myList = new List<object>();
+        private int pageIndex = 1;
 
         /// <summary>
-        /// Search page main constructor
+        ///     Search page main constructor
         /// </summary>
         public SearchPage()
         {
@@ -35,8 +28,8 @@ namespace Client
             cbNumberOfRecords.Items.Add("50");
             cbNumberOfRecords.Items.Add("100");
             cbNumberOfRecords.SelectedItem = 10;
-            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
-            this.Loaded += MainWindow_Loaded;
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            Loaded += MainWindow_Loaded;
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -44,7 +37,7 @@ namespace Client
             myList = GetData();
             //GetNotes();
             dataGrid.ItemsSource = myList.Take(numberOfRecPerPage);
-            int count = myList.Take(numberOfRecPerPage).Count();
+            var count = myList.Take(numberOfRecPerPage).Count();
             lblpageInformation.Content = count + " of " + myList.Count;
         }
 
@@ -56,54 +49,63 @@ namespace Client
 
         private List<object> GetData()
         {
-            List<object> genericList = new List<object>();
+            var genericList = new List<object>();
             Student studentObj;
-            Random randomObj = new Random();
-            for (int i = 0; i < 1000; i++)
+            var randomObj = new Random();
+            for (var i = 0; i < 1000; i++)
             {
                 studentObj = new Student();
                 studentObj.FirstName = "First " + i;
                 studentObj.MiddleName = "Middle " + i;
                 studentObj.LastName = "Last " + i;
-                studentObj.Age = (uint)randomObj.Next(1, 100);
+                studentObj.Age = (uint) randomObj.Next(1, 100);
 
                 genericList.Add(studentObj);
             }
+
             return genericList;
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
+        }
+
+        //To check the paging direction according to use selection.
+        private enum PagingMode
+        {
+            First = 1,
+            Next = 2,
+            Previous = 3,
+            Last = 4,
+            PageCountChange = 5
         }
 
         #region Pagination 
 
-        private void btnFirst_Click(object sender, System.EventArgs e)
+        private void btnFirst_Click(object sender, EventArgs e)
         {
-            Navigate((int)PagingMode.First);
+            Navigate((int) PagingMode.First);
         }
 
-        private void btnNext_Click(object sender, System.EventArgs e)
+        private void btnNext_Click(object sender, EventArgs e)
         {
-            Navigate((int)PagingMode.Next);
-
+            Navigate((int) PagingMode.Next);
         }
 
-        private void btnPrev_Click(object sender, System.EventArgs e)
+        private void btnPrev_Click(object sender, EventArgs e)
         {
-            Navigate((int)PagingMode.Previous);
-
+            Navigate((int) PagingMode.Previous);
         }
 
-        private void btnLast_Click(object sender, System.EventArgs e)
+        private void btnLast_Click(object sender, EventArgs e)
         {
-            Navigate((int)PagingMode.Last);
+            Navigate((int) PagingMode.Last);
         }
 
         private void cbNumberOfRecords_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Navigate((int)PagingMode.PageCountChange);
+            Navigate((int) PagingMode.PageCountChange);
         }
 
         private void Navigate(int mode)
@@ -111,26 +113,28 @@ namespace Client
             int count;
             switch (mode)
             {
-                case (int)PagingMode.Next:
+                case (int) PagingMode.Next:
                     btnPrev.IsEnabled = true;
                     btnFirst.IsEnabled = true;
-                    if (myList.Count >= (pageIndex * numberOfRecPerPage))
+                    if (myList.Count >= pageIndex * numberOfRecPerPage)
                     {
                         if (myList.Skip(pageIndex *
-                        numberOfRecPerPage).Take(numberOfRecPerPage).Count() == 0)
+                                        numberOfRecPerPage).Take(numberOfRecPerPage).Count() == 0)
                         {
                             dataGrid.ItemsSource = null;
-                            dataGrid.ItemsSource = myList.Skip((pageIndex *
-                            numberOfRecPerPage) - numberOfRecPerPage).Take(numberOfRecPerPage);
-                            count = (pageIndex * numberOfRecPerPage) +
-                            (myList.Skip(pageIndex *
-                            numberOfRecPerPage).Take(numberOfRecPerPage)).Count();
+                            dataGrid.ItemsSource = myList.Skip(pageIndex *
+                                                               numberOfRecPerPage - numberOfRecPerPage)
+                                .Take(numberOfRecPerPage);
+                            count = pageIndex * numberOfRecPerPage +
+                                    myList.Skip(pageIndex *
+                                                numberOfRecPerPage).Take(numberOfRecPerPage).Count();
                         }
                         else
                         {
                             dataGrid.ItemsSource = null;
                             dataGrid.ItemsSource = myList.Skip(pageIndex * numberOfRecPerPage).Take(numberOfRecPerPage);
-                            count = (pageIndex * numberOfRecPerPage) + (myList.Skip(pageIndex * numberOfRecPerPage).Take(numberOfRecPerPage)).Count();
+                            count = pageIndex * numberOfRecPerPage + myList.Skip(pageIndex * numberOfRecPerPage)
+                                        .Take(numberOfRecPerPage).Count();
                             pageIndex++;
                         }
 
@@ -145,7 +149,7 @@ namespace Client
 
                     break;
 
-                case (int)PagingMode.Previous:
+                case (int) PagingMode.Previous:
                     btnNext.IsEnabled = true;
                     btnLast.IsEnabled = true;
                     if (pageIndex > 1)
@@ -161,7 +165,7 @@ namespace Client
                         else
                         {
                             dataGrid.ItemsSource = myList.Skip
-                            (pageIndex * numberOfRecPerPage).Take(numberOfRecPerPage);
+                                (pageIndex * numberOfRecPerPage).Take(numberOfRecPerPage);
                             count = Math.Min(pageIndex * numberOfRecPerPage, myList.Count);
                             lblpageInformation.Content = count + " of " + myList.Count;
                         }
@@ -171,23 +175,24 @@ namespace Client
                         btnPrev.IsEnabled = false;
                         btnFirst.IsEnabled = false;
                     }
+
                     break;
 
-                case (int)PagingMode.First:
+                case (int) PagingMode.First:
                     pageIndex = 2;
-                    Navigate((int)PagingMode.Previous);
+                    Navigate((int) PagingMode.Previous);
                     break;
-                case (int)PagingMode.Last:
-                    pageIndex = (myList.Count / numberOfRecPerPage);
-                    Navigate((int)PagingMode.Next);
+                case (int) PagingMode.Last:
+                    pageIndex = myList.Count / numberOfRecPerPage;
+                    Navigate((int) PagingMode.Next);
                     break;
 
-                case (int)PagingMode.PageCountChange:
+                case (int) PagingMode.PageCountChange:
                     pageIndex = 1;
                     numberOfRecPerPage = Convert.ToInt32(cbNumberOfRecords.SelectedItem);
                     dataGrid.ItemsSource = null;
                     dataGrid.ItemsSource = myList.Take(numberOfRecPerPage);
-                    count = (myList.Take(numberOfRecPerPage)).Count();
+                    count = myList.Take(numberOfRecPerPage).Count();
                     lblpageInformation.Content = count + " of " + myList.Count;
                     btnNext.IsEnabled = true;
                     btnLast.IsEnabled = true;
@@ -203,4 +208,5 @@ namespace Client
         }
     }
 }
+
 #endregion

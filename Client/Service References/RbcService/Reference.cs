@@ -8,10 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Client.RbcService {
-    using System.Data;
-    
-    
+namespace Client.Service_References.RbcService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://web.cbr.ru/", ConfigurationName="RbcService.DailyInfoSoap")]
     public interface DailyInfoSoap {
@@ -550,12 +547,12 @@ namespace Client.RbcService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface DailyInfoSoapChannel : Client.RbcService.DailyInfoSoap, System.ServiceModel.IClientChannel {
+    public interface DailyInfoSoapChannel : DailyInfoSoap, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class DailyInfoSoapClient : System.ServiceModel.ClientBase<Client.RbcService.DailyInfoSoap>, Client.RbcService.DailyInfoSoap {
+    public partial class DailyInfoSoapClient : System.ServiceModel.ClientBase<DailyInfoSoap>, DailyInfoSoap {
         
         public DailyInfoSoapClient() {
         }

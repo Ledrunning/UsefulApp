@@ -6,13 +6,13 @@ using Microsoft.Win32; // Это для OpenFileDialog;
 using DAL;
 using System.Collections.Generic;
 using System.Data;
-using Client.RbcService;
 using System.Windows.Threading;
-using Client.ExchangeService;
-using Client.WeatherService;
-using Client.NotesService;
-using GeneralContract;
 using System.ServiceModel;
+using Client.Service_References.ExchangeService;
+using Client.Service_References.NotesService;
+using Client.Service_References.RbcService;
+using Client.Service_References.WeatherService;
+using TotalContract;
 
 namespace Client
 {

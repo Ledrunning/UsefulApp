@@ -74,7 +74,6 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="TotalContract, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -204,9 +203,9 @@
       <Project>{5b4a5770-d839-4192-92b9-1d5a8844efe2}</Project>
       <Name>DAL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TotalContract\GeneralContract.csproj">
+    <ProjectReference Include="..\TotalContract\TotalContract.csproj">
       <Project>{3db915c8-2d22-4a9b-b6b8-2015f98e4a1c}</Project>
-      <Name>GeneralContract</Name>
+      <Name>TotalContract</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -2,24 +2,24 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using Client.Service_References.NotesService;
+using TotalContract;
+
 //using GeneralContract;
-using System.Collections.Generic;
-using Client.NotesService;
 
 namespace Client
 {
     /// <summary>
-    /// Логика взаимодействия для Notes.xaml
+    ///     Логика взаимодействия для Notes.xaml
     /// </summary>
     /// To use services, please delete the link from references!!!
     public partial class NotesWindow : Window
     {
         //FactoryAndChannels factory = new FactoryAndChannels();
-       
-        GeneralContract.NotesData notesData = new GeneralContract.NotesData();
+
+        private readonly NotesData notesData = new NotesData();
 
         /// <summary>
-        /// 
         /// </summary>
         public NotesWindow()
         {
@@ -33,19 +33,19 @@ namespace Client
                 if (MainWindow.test != Guid.Empty)
                 {
                     //notesData.Id = Guid.Parse("689f5ab7-f779-4df3-bece-1aaaa64f8ddf"); // Проверка;
-                    Dispatcher.Invoke(new Action(delegate
+                    Dispatcher.Invoke(delegate
                     {
                         notesData.Id = MainWindow.test;
                         notesData.Header = header.Text;
                         notesData.Content = GetStringFromRtb(content);
                         //factory.CreateNotesFactory().Edit(notesData);
-                        using (NoteServiceContractClient notesService = new NoteServiceContractClient())
+                        using (var notesService = new NoteServiceContractClient())
                         {
                             notesService.Edit(notesData);
                         }
-                    }));
+                    });
 
-                    this.Close();
+                    Close();
                 }
 
                 else //if (notesData.Id == Guid.Empty && MainWindow.test == Guid.Empty)
@@ -56,26 +56,22 @@ namespace Client
                     }
                     else
                     {
-                        Dispatcher.Invoke(new Action(delegate
+                        Dispatcher.Invoke(delegate
                         {
                             notesData.Id = Guid.NewGuid();
-                            notesData.Time = (int)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalHours;
+                            notesData.Time = (int) (DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalHours;
                             notesData.Header = header.Text;
                             notesData.Content = GetStringFromRtb(content);
                             //factory.CreateNotesFactory().Add(notesData);
-                            using (NoteServiceContractClient notesService = new NoteServiceContractClient())
+                            using (var notesService = new NoteServiceContractClient())
                             {
                                 notesService.Add(notesData);
                             }
-                        }));
+                        });
 
-                        this.Close();
+                        Close();
                     }
-
                 }
-
-              
- 
             }
 
             catch (Exception err)
@@ -91,11 +87,11 @@ namespace Client
 
         private void cancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         /// <summary>
-        /// This method gets text content from RichTextBox
+        ///     This method gets text content from RichTextBox
         /// </summary>
         /// <param name="rtb"></param>
         /// <returns></returns>
@@ -106,7 +102,7 @@ namespace Client
         }
 
         /// <summary>
-        /// Method to show errors for users
+        ///     Method to show errors for users
         /// </summary>
         /// <param name="err"></param>
         public void ShowError(string err)
@@ -115,7 +111,7 @@ namespace Client
         }
 
         /// <summary>
-        /// Overloaded method for error
+        ///     Overloaded method for error
         /// </summary>
         /// <param name="err"></param>
         /// <param name="msg"></param>
@@ -125,21 +121,20 @@ namespace Client
         }
 
         /// <summary>
-        /// Random fillin notes to database
+        ///     Random fillin notes to database
         /// </summary>
         private async void FillNotes()
         {
-            GeneralContract.NotesData notesObj;
-            for (int i = 0; i < 600; i++)
+            NotesData notesObj;
+            for (var i = 0; i < 600; i++)
             {
-                
-                    notesObj = new GeneralContract.NotesData();
-                    notesObj.Id = Guid.NewGuid();
-                    notesObj.Header = "Header " + i;
-                    notesObj.Content = "Content " + i;
-                    notesObj.Time = (int)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalHours;
+                notesObj = new NotesData();
+                notesObj.Id = Guid.NewGuid();
+                notesObj.Header = "Header " + i;
+                notesObj.Content = "Content " + i;
+                notesObj.Time = (int) (DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalHours;
                 //factory.CreateNotesFactory().Add(notesObj);\
-                using (NoteServiceContractClient notesService = new NoteServiceContractClient())
+                using (var notesService = new NoteServiceContractClient())
                 {
                     await notesService.AddAsync(notesObj);
                 }

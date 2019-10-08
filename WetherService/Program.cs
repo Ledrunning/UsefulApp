@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ServiceModel;
-using GeneralContract;
 using System.ServiceModel.Description;
+using TotalContract;
 
 namespace WetherService
 {
@@ -18,8 +18,8 @@ namespace WetherService
 
             Uri address = new Uri("net.tcp://127.0.0.1:6001/Icontract");        // ADDRESS;
             NetTcpBinding binding = new NetTcpBinding();                        // BINDING;
-            Type construct = typeof(IWtServiceContract);                        // CONTRACT; 
-            ServiceHost host = new ServiceHost(typeof(CitiesWheather));
+            Type construct = typeof(IWeatherServiceContract);                        // CONTRACT; 
+            ServiceHost host = new ServiceHost(typeof(CitiesWeather));
             host.AddServiceEndpoint(construct, binding, address);
             host.Description.Behaviors.Add(new ServiceMetadataBehavior());
             host.AddServiceEndpoint(typeof(IMetadataExchange), MetadataExchangeBindings.CreateMexTcpBinding(), "net.tcp://127.0.0.1:6001/Icontract/mex");

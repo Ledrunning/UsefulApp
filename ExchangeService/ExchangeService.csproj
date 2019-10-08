@@ -51,9 +51,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TotalContract\GeneralContract.csproj">
+    <ProjectReference Include="..\TotalContract\TotalContract.csproj">
       <Project>{3db915c8-2d22-4a9b-b6b8-2015f98e4a1c}</Project>
-      <Name>GeneralContract</Name>
+      <Name>TotalContract</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

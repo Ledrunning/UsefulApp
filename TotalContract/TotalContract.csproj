@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="INoteServiceContract.cs" />
-    <Compile Include="IWtServiceContract.cs" />
+    <Compile Include="IWeatherServiceContract.cs" />
     <Compile Include="IExServiceContract.cs" />
     <Compile Include="NotesData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

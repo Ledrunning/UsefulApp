@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Client.WeatherService {
+namespace Client.Service_References.WeatherService {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -29,12 +29,12 @@ namespace Client.WeatherService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IWtServiceContractChannel : Client.WeatherService.IWtServiceContract, System.ServiceModel.IClientChannel {
+    public interface IWtServiceContractChannel : IWtServiceContract, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class WtServiceContractClient : System.ServiceModel.ClientBase<Client.WeatherService.IWtServiceContract>, Client.WeatherService.IWtServiceContract {
+    public partial class WtServiceContractClient : System.ServiceModel.ClientBase<IWtServiceContract>, IWtServiceContract {
         
         public WtServiceContractClient() {
         }

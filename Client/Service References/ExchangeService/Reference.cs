@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Client.ExchangeService {
+namespace Client.Service_References.ExchangeService {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -23,12 +23,12 @@ namespace Client.ExchangeService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IExServiceContractChannel : Client.ExchangeService.IExServiceContract, System.ServiceModel.IClientChannel {
+    public interface IExServiceContractChannel : IExServiceContract, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ExServiceContractClient : System.ServiceModel.ClientBase<Client.ExchangeService.IExServiceContract>, Client.ExchangeService.IExServiceContract {
+    public partial class ExServiceContractClient : System.ServiceModel.ClientBase<IExServiceContract>, IExServiceContract {
         
         public ExServiceContractClient() {
         }
