@@ -62,7 +62,6 @@ namespace Client
             //Vcurs - Курс
             //Vcode - ISO Цифровой код валюты
             //VchCode - ISO Символьный код валюты
-            var lst = new List<string>();
             var client = new DailyInfoSoapClient();
 
             try

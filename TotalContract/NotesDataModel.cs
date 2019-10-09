@@ -9,7 +9,6 @@ namespace TotalContract
     public class NotesDataModel
     {
         [DataMember]
-        // Гуид нужен что бы генерировать автоматически значения, в методе примениить Guid.NewGuid();
         public Guid Id { get; set; }
 
         [DataMember] public string Header { get; set; }

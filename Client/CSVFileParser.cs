@@ -12,14 +12,14 @@ namespace Client
             string[] read;
             char[] separators = {',', '\t', '\n', '\r', '_'};
 
-            using (var sr = new StreamReader(path))
+            using (var reader = new StreamReader(path))
             {
-                var data = sr.ReadLine();
+                var data = reader.ReadLine();
                 var nd = new NotesDataModel();
 
                 try
                 {
-                    while ((data = sr.ReadLine()) != null)
+                    while ((data = reader.ReadLine()) != null)
                     {
                         read = data.Split(separators, StringSplitOptions.RemoveEmptyEntries);
                         nd.Id = Guid.Parse(read[0]);

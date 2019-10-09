@@ -4,7 +4,7 @@ using TotalContract;
 namespace Client
 {
     /// <summary>
-    ///     Class for creating service channels
+    ///     Class for creating service channels (deprecated)
     /// </summary>
     public class FactoryAndChannels
     {
