@@ -8,13 +8,13 @@ namespace TotalContract
     public interface INoteServiceContract
     {
         [OperationContract]
-        void Add(NotesData data);
+        void Add(NotesDataModel dataModel);
 
         [OperationContract]
         void GetById(Guid id);
 
         [OperationContract]
-        List<NotesData> GetAll();
+        List<NotesDataModel> GetAll();
 
         [OperationContract]
         string SearchBy();
@@ -23,7 +23,7 @@ namespace TotalContract
         void DeleteNote(Guid id);
 
         [OperationContract]
-        void Edit(NotesData data);
+        void Edit(NotesDataModel dataModel);
 
         [OperationContract]
         void DeleteAll();

@@ -15,7 +15,7 @@ namespace Client
             using (var sr = new StreamReader(path))
             {
                 var data = sr.ReadLine();
-                var nd = new NotesData();
+                var nd = new NotesDataModel();
 
                 try
                 {

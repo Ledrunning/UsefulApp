@@ -43,8 +43,8 @@
   <ItemGroup>
     <Compile Include="INoteServiceContract.cs" />
     <Compile Include="IWeatherServiceContract.cs" />
-    <Compile Include="IExServiceContract.cs" />
-    <Compile Include="NotesData.cs" />
+    <Compile Include="IExchangeServiceContract.cs" />
+    <Compile Include="NotesDataModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

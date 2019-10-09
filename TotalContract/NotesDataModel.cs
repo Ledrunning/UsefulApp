@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 namespace TotalContract
 {
     [DataContract]
-    public class NotesData
+    public class NotesDataModel
     {
         [DataMember]
         // Гуид нужен что бы генерировать автоматически значения, в методе примениить Guid.NewGuid();

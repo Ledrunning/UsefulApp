@@ -51,9 +51,9 @@ namespace Client
         /// <summary>
         ///     OpenFile diolog method
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="dataModel"></param>
         /// <param name="dialog"></param>
-        public void OpenFileDialog(NotesData[] data, SaveFileDialog dialog)
+        public void OpenFileDialog(NotesDataModel[] dataModel, SaveFileDialog dialog)
         {
             if (dialog.ShowDialog() == true)
             {
@@ -61,7 +61,7 @@ namespace Client
                 var streamWriter = new StreamWriter(path, true, Encoding.GetEncoding(1251));
                 using (streamWriter)
                 {
-                    foreach (var item in data)
+                    foreach (var item in dataModel)
                     {
                         streamWriter.Write(item.Id + ",");
                         streamWriter.Write(item.Header + ",");

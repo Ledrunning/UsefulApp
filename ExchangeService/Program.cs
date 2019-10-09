@@ -14,7 +14,7 @@ namespace ExchangeService
 
             var address = new Uri("net.tcp://127.0.0.1:6000/Icontract"); // ADDRESS
             var binding = new NetTcpBinding(); // BINDING
-            var contract = typeof(IExServiceContract); //CONTRACT; 
+            var contract = typeof(IExchangeServiceContract); //CONTRACT; 
             var host = new ServiceHost(typeof(MoneyConverter));
             host.AddServiceEndpoint(contract, binding, address);
             host.Description.Behaviors.Add(new ServiceMetadataBehavior());

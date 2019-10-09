@@ -7,7 +7,7 @@ using TotalContract;
 
 namespace WetherService
 {
-    public class CitiesWeather : IWeatherServiceContract
+    public class WeatherProvider : IWeatherServiceContract
     {
         /// <summary>
         ///     Method for test this app
@@ -49,7 +49,7 @@ namespace WetherService
 
             try
             {
-                var weatherResponse = JsonConvert.DeserializeObject<WeatherResponse>(response);
+                var weatherResponse = JsonConvert.DeserializeObject<WeatherModel>(response);
 
                 result =
                     $"Temperature in {weatherResponse.Name}: {weatherResponse.Main.Temp} °C\n Humidity: {weatherResponse.Main.Humidity} %" +

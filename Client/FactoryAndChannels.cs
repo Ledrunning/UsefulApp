@@ -8,7 +8,7 @@ namespace Client
     /// </summary>
     public class FactoryAndChannels
     {
-        private readonly ChannelFactory<IExServiceContract> firstFactory = new ChannelFactory<IExServiceContract>(
+        private readonly ChannelFactory<IExchangeServiceContract> firstFactory = new ChannelFactory<IExchangeServiceContract>(
             new NetTcpBinding(),
             new EndpointAddress("net.tcp://127.0.0.1:6000/Icontract"));
 
@@ -34,7 +34,7 @@ namespace Client
         ///     Exchange service method
         /// </summary>
         /// <returns></returns>
-        public IExServiceContract CreateExchangeFactory()
+        public IExchangeServiceContract CreateExchangeFactory()
         {
             var exService = firstFactory.CreateChannel();
             return exService;

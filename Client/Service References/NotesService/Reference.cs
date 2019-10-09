@@ -18,10 +18,10 @@ namespace Client.Service_References.NotesService {
     public interface INoteServiceContract {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INoteServiceContract/Add", ReplyAction="http://tempuri.org/INoteServiceContract/AddResponse")]
-        void Add(NotesData nd);
+        void Add(NotesDataModel nd);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INoteServiceContract/Add", ReplyAction="http://tempuri.org/INoteServiceContract/AddResponse")]
-        System.Threading.Tasks.Task AddAsync(NotesData nd);
+        System.Threading.Tasks.Task AddAsync(NotesDataModel nd);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INoteServiceContract/GetById", ReplyAction="http://tempuri.org/INoteServiceContract/GetByIdResponse")]
         void GetById(System.Guid id);
@@ -30,10 +30,10 @@ namespace Client.Service_References.NotesService {
         System.Threading.Tasks.Task GetByIdAsync(System.Guid id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INoteServiceContract/GetAll", ReplyAction="http://tempuri.org/INoteServiceContract/GetAllResponse")]
-        NotesData[] GetAll();
+        NotesDataModel[] GetAll();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INoteServiceContract/GetAll", ReplyAction="http://tempuri.org/INoteServiceContract/GetAllResponse")]
-        System.Threading.Tasks.Task<NotesData[]> GetAllAsync();
+        System.Threading.Tasks.Task<NotesDataModel[]> GetAllAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INoteServiceContract/SearchBy", ReplyAction="http://tempuri.org/INoteServiceContract/SearchByResponse")]
         string SearchBy();
@@ -48,10 +48,10 @@ namespace Client.Service_References.NotesService {
         System.Threading.Tasks.Task DeleteNoteAsync(System.Guid id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INoteServiceContract/Edit", ReplyAction="http://tempuri.org/INoteServiceContract/EditResponse")]
-        void Edit(NotesData nt);
+        void Edit(NotesDataModel nt);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INoteServiceContract/Edit", ReplyAction="http://tempuri.org/INoteServiceContract/EditResponse")]
-        System.Threading.Tasks.Task EditAsync(NotesData nt);
+        System.Threading.Tasks.Task EditAsync(NotesDataModel nt);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INoteServiceContract/DeleteAll", ReplyAction="http://tempuri.org/INoteServiceContract/DeleteAllResponse")]
         void DeleteAll();
@@ -87,11 +87,11 @@ namespace Client.Service_References.NotesService {
                 base(binding, remoteAddress) {
         }
         
-        public void Add(NotesData nd) {
+        public void Add(NotesDataModel nd) {
             base.Channel.Add(nd);
         }
         
-        public System.Threading.Tasks.Task AddAsync(NotesData nd) {
+        public System.Threading.Tasks.Task AddAsync(NotesDataModel nd) {
             return base.Channel.AddAsync(nd);
         }
         
@@ -103,11 +103,11 @@ namespace Client.Service_References.NotesService {
             return base.Channel.GetByIdAsync(id);
         }
         
-        public NotesData[] GetAll() {
+        public NotesDataModel[] GetAll() {
             return base.Channel.GetAll();
         }
         
-        public System.Threading.Tasks.Task<NotesData[]> GetAllAsync() {
+        public System.Threading.Tasks.Task<NotesDataModel[]> GetAllAsync() {
             return base.Channel.GetAllAsync();
         }
         
@@ -127,11 +127,11 @@ namespace Client.Service_References.NotesService {
             return base.Channel.DeleteNoteAsync(id);
         }
         
-        public void Edit(NotesData nt) {
+        public void Edit(NotesDataModel nt) {
             base.Channel.Edit(nt);
         }
         
-        public System.Threading.Tasks.Task EditAsync(NotesData nt) {
+        public System.Threading.Tasks.Task EditAsync(NotesDataModel nt) {
             return base.Channel.EditAsync(nt);
         }
         

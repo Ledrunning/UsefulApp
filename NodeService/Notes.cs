@@ -9,12 +9,12 @@ namespace NoteService
 {
     public class Notes : INoteServiceContract
     {
-        public void Add(NotesData data)
+        public void Add(NotesDataModel dataModel)
         {
             var nr = new NotesRepository();
             try
             {
-                nr.Add(new NoteEntity {Id = data.Id, Header = data.Header, Content = data.Content, Time = data.Time});
+                nr.Add(new NoteEntity {Id = dataModel.Id, Header = dataModel.Header, Content = dataModel.Content, Time = dataModel.Time});
             }
             catch (Exception err)
             {
@@ -26,13 +26,13 @@ namespace NoteService
         {
         }
 
-        public List<NotesData> GetAll()
+        public List<NotesDataModel> GetAll()
         {
             var nr = new NotesRepository();
 
             try
             {
-                var result = nr.GetAll().Select(e => new NotesData
+                var result = nr.GetAll().Select(e => new NotesDataModel
                     {Id = e.Id, Header = e.Header, Content = e.Content, Time = e.Time}).ToList();
                 return result;
             }
@@ -49,9 +49,7 @@ namespace NoteService
 
         public void DeleteNote(Guid id)
         {
-            //var a = new DAL.NoteEntity() { Id = id };
             var nr = new NotesRepository();
-            //DAL.NotesRepository.DeleteNote(id);
             try
             {
                 nr.DeleteNote(id);
@@ -62,13 +60,12 @@ namespace NoteService
             }
         }
 
-        public void Edit(NotesData data)
+        public void Edit(NotesDataModel dataModel)
         {
             var nr = new NotesRepository();
-            //DAL.NotesRepository.Edit(new DAL.NoteEntity() { Id = nd.Id, Header = nd.Header, Content = nd.Content });
             try
             {
-                nr.Edit(new NoteEntity {Id = data.Id, Header = data.Header, Content = data.Content});
+                nr.Edit(new NoteEntity {Id = dataModel.Id, Header = dataModel.Header, Content = dataModel.Content});
             }
             catch (Exception err)
             {
@@ -78,7 +75,6 @@ namespace NoteService
 
         public void DeleteAll()
         {
-            //DAL.NotesRepository.DeleteAll();
             var nr = new NotesRepository();
             try
             {

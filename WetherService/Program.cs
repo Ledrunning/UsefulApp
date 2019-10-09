@@ -15,7 +15,7 @@ namespace WetherService
             var address = new Uri("net.tcp://127.0.0.1:6001/Icontract"); // ADDRESS;
             var binding = new NetTcpBinding(); // BINDING;
             var construct = typeof(IWeatherServiceContract); // CONTRACT; 
-            var host = new ServiceHost(typeof(CitiesWeather));
+            var host = new ServiceHost(typeof(WeatherProvider));
             host.AddServiceEndpoint(construct, binding, address);
             host.Description.Behaviors.Add(new ServiceMetadataBehavior());
             host.AddServiceEndpoint(typeof(IMetadataExchange), MetadataExchangeBindings.CreateMexTcpBinding(),

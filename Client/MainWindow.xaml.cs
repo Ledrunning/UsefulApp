@@ -263,7 +263,7 @@ namespace Client
         private void ImportCsvMenuItem_Click(object sender, RoutedEventArgs e)
         {
             var of = new OpenFileDialog();
-            var nd = new NotesData();
+            var nd = new NotesDataModel();
             //CSVFileParser parser = new CSVFileParser(path);
             of.Filter = "CSV Files(*.csv)|*.csv|All(*.*)|*";
 
@@ -294,11 +294,11 @@ namespace Client
             //var rdDataFromDB = factory.CreateNotesFactory().GetAll();
             //List<NotesData> rdDataFromDB = new List<NotesData>();
 
-            NotesData[] rdDataFromDB;
+            NotesDataModel[] rdDataModelFromDb;
 
             using (var notesService = new NoteServiceContractClient())
             {
-                rdDataFromDB = await notesService.GetAllAsync();
+                rdDataModelFromDb = await notesService.GetAllAsync();
             }
 
             var sf = new SaveFile();
@@ -309,7 +309,7 @@ namespace Client
 
             try
             {
-                sf.OpenFileDialog(rdDataFromDB, safeFile);
+                sf.OpenFileDialog(rdDataModelFromDb, safeFile);
             }
             catch (Exception ex)
             {
@@ -354,7 +354,7 @@ namespace Client
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            var selectedId = ((NotesData) ListOfNotes.SelectedItem).Id;
+            var selectedId = ((NotesDataModel) ListOfNotes.SelectedItem).Id;
             //factory.CreateNotesFactory().DeleteNote(selectedId);
             using (var notesService = new NoteServiceContractClient())
             {
@@ -395,7 +395,7 @@ namespace Client
 
                     var selectedCell = ListOfNotes.SelectedCells[selectedColumn];
                     var cellContent = selectedCell.Column.GetCellContent(selectedCell.Item);
-                    var notesData = new NotesData();
+                    var notesData = new NotesDataModel();
 
                     for (var i = 0; i < Constants.DataGridSize; i++)
                     {

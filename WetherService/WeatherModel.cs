@@ -1,6 +1,6 @@
 ﻿namespace WetherService
 {
-    public class WeatherResponse
+    public class WeatherModel
     {
         public TemperatureInfo Main { get; set; }
 

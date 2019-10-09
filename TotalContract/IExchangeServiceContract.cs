@@ -3,7 +3,7 @@
 namespace TotalContract
 {
     [ServiceContract]
-    public interface IExServiceContract
+    public interface IExchangeServiceContract
     {
         [OperationContract]
         decimal Get(decimal money, string inValue, string outValue);

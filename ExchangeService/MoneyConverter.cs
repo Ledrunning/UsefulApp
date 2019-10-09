@@ -2,7 +2,7 @@
 
 namespace ExchangeService
 {
-    public class MoneyConverter : IExServiceContract
+    public class MoneyConverter : IExchangeServiceContract
     {
         private const decimal ConvertCoefficient = 50;
 

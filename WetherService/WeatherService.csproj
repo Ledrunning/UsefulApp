@@ -46,11 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CitiesWeather.cs" />
+    <Compile Include="WeatherProvider.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TemperatureInfo.cs" />
-    <Compile Include="WeatherResponse.cs" />
+    <Compile Include="WeatherModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
