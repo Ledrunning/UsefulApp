@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>5c6459ad-8e67-4af9-9779-3f7a4e349d99</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>UsefulApp.Localization</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\TranslatorControlAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\TranslatorCustomControlAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Configuration\BaseLocalizationConfiguration.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Configuration\IBaseLocalizationConfiguration.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Configuration\Language.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Configuration\Translation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Configuration\TranslationConfiguration.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Configuration\Translations.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enums\LocalizationType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EventArgs\LanguageChangeEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EventArgs\LanguageEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)XmlHelper.cs" />
+  </ItemGroup>
+</Project>
