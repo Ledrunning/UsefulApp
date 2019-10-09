@@ -35,7 +35,7 @@ namespace Client
 
         private decimal money;
 
-        //Needed when I use GeneralCOntracts without link to service;
+        // Now channels buil from app.config
         //FactoryAndChannels factory = new FactoryAndChannels();
 
 
