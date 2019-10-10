@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Text;
+using Client.NotesService;
 using Microsoft.Win32;
-using TotalContract;
 
 namespace Client
 {
@@ -53,7 +53,7 @@ namespace Client
         /// </summary>
         /// <param name="dataModel"></param>
         /// <param name="dialog"></param>
-        public void OpenFileDialog(NotesDataModel[] dataModel, SaveFileDialog dialog)
+        public void OpenFileDialog(NotesData[] dataModel, SaveFileDialog dialog)
         {
             if (dialog.ShowDialog() == true)
             {

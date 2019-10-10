@@ -17,7 +17,7 @@ namespace Client
     {
         //FactoryAndChannels factory = new FactoryAndChannels();
 
-        private readonly NotesDataModel notesDataModel = new NotesDataModel();
+        private readonly NotesData notesDataModel = new NotesData();
 
         /// <summary>
         /// </summary>
@@ -125,10 +125,10 @@ namespace Client
         /// </summary>
         private async void FillNotes()
         {
-            NotesDataModel notesObj;
+            NotesData notesObj;
             for (var i = 0; i < 600; i++)
             {
-                notesObj = new NotesDataModel();
+                notesObj = new NotesData();
                 notesObj.Id = Guid.NewGuid();
                 notesObj.Header = "Header " + i;
                 notesObj.Content = "Content " + i;
