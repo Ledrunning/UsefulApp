@@ -12,40 +12,40 @@ namespace Client.ExchangeService {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ExchangeService.IExServiceContract")]
-    public interface IExServiceContract {
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ExchangeService.IExchangeServiceContract")]
+    public interface IExchangeServiceContract {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IExServiceContract/Get", ReplyAction="http://tempuri.org/IExServiceContract/GetResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IExchangeServiceContract/Get", ReplyAction="http://tempuri.org/IExchangeServiceContract/GetResponse")]
         decimal Get(decimal money, string inValue, string outValue);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IExServiceContract/Get", ReplyAction="http://tempuri.org/IExServiceContract/GetResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IExchangeServiceContract/Get", ReplyAction="http://tempuri.org/IExchangeServiceContract/GetResponse")]
         System.Threading.Tasks.Task<decimal> GetAsync(decimal money, string inValue, string outValue);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IExServiceContractChannel : Client.ExchangeService.IExServiceContract, System.ServiceModel.IClientChannel {
+    public interface IExchangeServiceContractChannel : Client.ExchangeService.IExchangeServiceContract, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ExServiceContractClient : System.ServiceModel.ClientBase<Client.ExchangeService.IExServiceContract>, Client.ExchangeService.IExServiceContract {
+    public partial class ExchangeServiceContractClient : System.ServiceModel.ClientBase<Client.ExchangeService.IExchangeServiceContract>, Client.ExchangeService.IExchangeServiceContract {
         
-        public ExServiceContractClient() {
+        public ExchangeServiceContractClient() {
         }
         
-        public ExServiceContractClient(string endpointConfigurationName) : 
+        public ExchangeServiceContractClient(string endpointConfigurationName) : 
                 base(endpointConfigurationName) {
         }
         
-        public ExServiceContractClient(string endpointConfigurationName, string remoteAddress) : 
+        public ExchangeServiceContractClient(string endpointConfigurationName, string remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ExServiceContractClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public ExchangeServiceContractClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ExServiceContractClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public ExchangeServiceContractClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         

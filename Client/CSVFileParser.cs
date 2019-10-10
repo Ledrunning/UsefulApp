@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using Client.Service_References.NotesService;
+using Client.NotesService;
 using TotalContract;
 
 namespace Client

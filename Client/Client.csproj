@@ -106,17 +106,17 @@
     <Compile Include="SearchPage.xaml.cs">
       <DependentUpon>SearchPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Service References\RbcService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="Service References\ExchangeService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Service References\NotesService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\RbcService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -236,7 +236,6 @@
     <None Include="Service References\NotesService\Client.NotesService.NotesData.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\RbcService\DailyInfo.wsdl" />
     <None Include="Service References\ExchangeService\service.wsdl" />
     <None Include="Service References\ExchangeService\service.xsd">
       <SubType>Designer</SubType>
@@ -254,6 +253,7 @@
     <None Include="Service References\NotesService\service1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\RbcService\DailyInfo.wsdl" />
     <None Include="Service References\WeatherService\service.wsdl" />
     <None Include="Service References\WeatherService\service.xsd">
       <SubType>Designer</SubType>
@@ -285,25 +285,10 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Service References\RbcService\" />
     <WCFMetadataStorage Include="Service References\ExchangeService\" />
     <WCFMetadataStorage Include="Service References\NotesService\" />
+    <WCFMetadataStorage Include="Service References\RbcService\" />
     <WCFMetadataStorage Include="Service References\WeatherService\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\RbcService\DailyInfo.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\RbcService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\RbcService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\RbcService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\search.png" />
@@ -365,7 +350,18 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Service References\RbcService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RbcService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RbcService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
   <Import Project="..\UsefulApp.Localization\UsefulApp.Localization.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

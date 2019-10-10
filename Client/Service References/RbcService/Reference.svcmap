@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="4dc16de4-bff8-4371-9669-a525862e7aa4" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="6636bbd9-ccc4-4a60-89b1-93719241057f" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -19,11 +19,10 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://www.cbr.ru/DailyInfoWebServ/DailyInfo.asmx" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://www.cbr.ru/DailyInfoWebServ/DailyInfo.asmx?WSDL" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="DailyInfo.wsdl" MetadataType="Wsdl" ID="b9e4b5b6-3b24-4617-9232-7d5903453337" SourceId="1" SourceUrl="http://www.cbr.ru/DailyInfoWebServ/DailyInfo.asmx?wsdl" />
-    <MetadataFile FileName="DailyInfo.disco" MetadataType="Disco" ID="c6f41d45-47dc-4987-a88d-5def9c36dfbf" SourceId="1" SourceUrl="http://www.cbr.ru/DailyInfoWebServ/DailyInfo.asmx?disco" />
+    <MetadataFile FileName="DailyInfo.wsdl" MetadataType="Wsdl" ID="0018458f-1b3f-4df7-8c6f-14723d0e2b92" SourceId="1" SourceUrl="http://www.cbr.ru/DailyInfoWebServ/DailyInfo.asmx?WSDL" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
