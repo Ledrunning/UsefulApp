@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://web.cbr.ru/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://web.cbr.ru/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
-  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Веб сервис для получения ежедневных данных ver 31.01.2017</wsdl:documentation>
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Веб сервис для получения ежедневных данных ver 28.05.2019</wsdl:documentation>
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://web.cbr.ru/">
       <s:element name="SaldoXML">
@@ -2099,7 +2099,7 @@
       <wsdl:output message="tns:XVolXMLSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="MainInfoXML">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Получение основной информации - Ставка рефинансирования, золотовалютные резервы, денежная база, денежная масса (как XMLDocument)</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Получение основной информации - Ставка рефинансирования, золотовалютные резервы, денежная база, денежная масса (как XMLDocument) ver 28.05.2019</wsdl:documentation>
       <wsdl:input message="tns:MainInfoXMLSoapIn" />
       <wsdl:output message="tns:MainInfoXMLSoapOut" />
     </wsdl:operation>
@@ -3754,7 +3754,7 @@
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="DailyInfo">
-    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Веб сервис для получения ежедневных данных ver 31.01.2017</wsdl:documentation>
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Веб сервис для получения ежедневных данных ver 28.05.2019</wsdl:documentation>
     <wsdl:port name="DailyInfoSoap" binding="tns:DailyInfoSoap">
       <soap:address location="http://www.cbr.ru/DailyInfoWebServ/DailyInfo.asmx" />
     </wsdl:port>

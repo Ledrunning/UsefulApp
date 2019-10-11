@@ -11,10 +11,11 @@ namespace NoteService
     {
         public void Add(NotesDataModel dataModel)
         {
-            var nr = new NotesRepository();
+            var notesRepository = new NotesRepository();
             try
             {
-                nr.Add(new NoteEntity {Id = dataModel.Id, Header = dataModel.Header, Content = dataModel.Content, Time = dataModel.Time});
+                notesRepository.Add(new NoteEntity
+                    {Id = dataModel.Id, Header = dataModel.Header, Content = dataModel.Content, Time = dataModel.Time});
             }
             catch (Exception err)
             {
@@ -28,11 +29,11 @@ namespace NoteService
 
         public List<NotesDataModel> GetAll()
         {
-            var nr = new NotesRepository();
+            var notesRepository = new NotesRepository();
 
             try
             {
-                var result = nr.GetAll().Select(e => new NotesDataModel
+                var result = notesRepository.GetAll().Select(e => new NotesDataModel
                     {Id = e.Id, Header = e.Header, Content = e.Content, Time = e.Time}).ToList();
                 return result;
             }
@@ -49,10 +50,10 @@ namespace NoteService
 
         public void DeleteNote(Guid id)
         {
-            var nr = new NotesRepository();
+            var notesRepository = new NotesRepository();
             try
             {
-                nr.DeleteNote(id);
+                notesRepository.DeleteNote(id);
             }
             catch (Exception err)
             {
@@ -62,10 +63,10 @@ namespace NoteService
 
         public void Edit(NotesDataModel dataModel)
         {
-            var nr = new NotesRepository();
+            var notesRepository = new NotesRepository();
             try
             {
-                nr.Edit(new NoteEntity {Id = dataModel.Id, Header = dataModel.Header, Content = dataModel.Content});
+                notesRepository.Edit(new NoteEntity {Id = dataModel.Id, Header = dataModel.Header, Content = dataModel.Content});
             }
             catch (Exception err)
             {
@@ -75,10 +76,10 @@ namespace NoteService
 
         public void DeleteAll()
         {
-            var nr = new NotesRepository();
+            var notesRepository = new NotesRepository();
             try
             {
-                nr.DeleteAll();
+                notesRepository.DeleteAll();
             }
             catch (Exception err)
             {

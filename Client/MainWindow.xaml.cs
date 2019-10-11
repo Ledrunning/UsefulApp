@@ -1,16 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using Client.Service_References.ExchangeService;
-using Client.Service_References.NotesService;
-using Client.Service_References.RbcService;
-using Client.Service_References.WeatherService;
+using Client.ExchangeService;
+using Client.NotesService;
+using Client.RbcService;
+using Client.WeatherService;
 using Microsoft.Win32;
 using TotalContract;
+
 // Это для OpenFileDialog; 
 
 namespace Client
@@ -88,7 +88,7 @@ namespace Client
                 if (isMoneyValueRigth) money = tempMoney;
 
                 //decimal result = factory.CreateExchangeFactory().Get(money, chooseCurrency.Text, toCurrency.Text);
-                using (var currencyService = new ExServiceContractClient())
+                using (var currencyService = new ExchangeServiceContractClient())
                 {
                     var result = await currencyService.GetAsync(money, chooseCurrency.Text, toCurrency.Text);
                     if (toCurrency.Text == "Рубль")
@@ -131,7 +131,7 @@ namespace Client
             try
             {
                 //string result = factory.CreateWeatherFactory().GetWeatherFromOpenWeatherApi();
-                using (var weatherService = new WtServiceContractClient())
+                using (var weatherService = new WeatherServiceContractClient())
                 {
                     var getWeather = await weatherService.GetWeatherFromOpenWeatherApiAsync();
                     //weather.Text = result.ToString();
@@ -293,14 +293,14 @@ namespace Client
             //var rdDataFromDB = factory.CreateNotesFactory().GetAll();
             //List<NotesData> rdDataFromDB = new List<NotesData>();
 
-            NotesDataModel[] rdDataModelFromDb;
+            NotesData[] dataModel;
 
             using (var notesService = new NoteServiceContractClient())
             {
-                rdDataModelFromDb = await notesService.GetAllAsync();
+                dataModel = await notesService.GetAllAsync();
             }
 
-            var sf = new SaveFile();
+            var saveFile = new SaveFile();
             var safeFile = new SaveFileDialog();
             safeFile.Filter = "CSV Files(*.csv)|*.csv|All(*.*)|*";
             safeFile.RestoreDirectory = true;
@@ -308,7 +308,7 @@ namespace Client
 
             try
             {
-                sf.OpenFileDialog(rdDataModelFromDb, safeFile);
+                saveFile.OpenFileDialog(dataModel, safeFile);
             }
             catch (Exception ex)
             {

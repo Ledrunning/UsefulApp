@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
-using Client.Service_References.NotesService;
+using Client.NotesService;
 using TotalContract;
 
 //using GeneralContract;
@@ -17,7 +17,7 @@ namespace Client
     {
         //FactoryAndChannels factory = new FactoryAndChannels();
 
-        private readonly NotesDataModel _notesDataModel = new NotesDataModel();
+        private readonly NotesData notesDataModel = new NotesData();
 
         /// <summary>
         /// </summary>
@@ -35,13 +35,13 @@ namespace Client
                     //notesData.Id = Guid.Parse("689f5ab7-f779-4df3-bece-1aaaa64f8ddf"); // Проверка;
                     Dispatcher.Invoke(delegate
                     {
-                        _notesDataModel.Id = MainWindow.test;
-                        _notesDataModel.Header = header.Text;
-                        _notesDataModel.Content = GetStringFromRtb(content);
+                        notesDataModel.Id = MainWindow.test;
+                        notesDataModel.Header = header.Text;
+                        notesDataModel.Content = GetStringFromRtb(content);
                         //factory.CreateNotesFactory().Edit(notesData);
                         using (var notesService = new NoteServiceContractClient())
                         {
-                            notesService.Edit(_notesDataModel);
+                            notesService.Edit(notesDataModel);
                         }
                     });
 
@@ -58,14 +58,14 @@ namespace Client
                     {
                         Dispatcher.Invoke(delegate
                         {
-                            _notesDataModel.Id = Guid.NewGuid();
-                            _notesDataModel.Time = (int) (DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalHours;
-                            _notesDataModel.Header = header.Text;
-                            _notesDataModel.Content = GetStringFromRtb(content);
+                            notesDataModel.Id = Guid.NewGuid();
+                            notesDataModel.Time = (int) (DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalHours;
+                            notesDataModel.Header = header.Text;
+                            notesDataModel.Content = GetStringFromRtb(content);
                             //factory.CreateNotesFactory().Add(notesData);
                             using (var notesService = new NoteServiceContractClient())
                             {
-                                notesService.Add(_notesDataModel);
+                                notesService.Add(notesDataModel);
                             }
                         });
 
@@ -121,14 +121,14 @@ namespace Client
         }
 
         /// <summary>
-        ///     Random fillin notes to database
+        ///     Random fillin notes to database TEST
         /// </summary>
         private async void FillNotes()
         {
-            NotesDataModel notesObj;
+            NotesData notesObj;
             for (var i = 0; i < 600; i++)
             {
-                notesObj = new NotesDataModel();
+                notesObj = new NotesData();
                 notesObj.Id = Guid.NewGuid();
                 notesObj.Header = "Header " + i;
                 notesObj.Content = "Content " + i;
