@@ -19,7 +19,7 @@ namespace DAL
         /// sqlite3 usefulapp.dp "" Creating empty sqlite database
         /// </summary>
         public DataBaseContext() :
-            base(new SQLiteConnection()
+            base(existingConnection: new SQLiteConnection()
             {
                 ConnectionString = new SQLiteConnectionStringBuilder() { DataSource = @"D:\OpenSourceDevelopment\UsefulApp\NodeService\usefulapp.db", ForeignKeys = true }.ConnectionString
             }, true)
