@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Xml.Serialization;
-namespace UsefulApp.Localization
+
+namespace Client
 {
     public static class XmlHelper
     {

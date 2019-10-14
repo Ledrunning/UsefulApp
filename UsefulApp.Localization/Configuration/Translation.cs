@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace UsefulApp.Localization.Configuration
+namespace Client.Configuration
 {
 	public class Translation
 	{

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using Client.NotesService;
+using Client.Service_References.NotesService;
 
 namespace Client.Helpers
 {

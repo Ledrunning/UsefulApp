@@ -1,4 +1,4 @@
-﻿namespace UsefulApp.Localization.Configuration
+﻿namespace Client.Configuration
 {
     public class BaseLocalizationConfiguration : IBaseLocalizationConfiguration
     {

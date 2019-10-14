@@ -4,17 +4,17 @@ using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using Client.ExchangeService;
 using Client.Helpers;
-using Client.NotesService;
-using Client.RbcService;
-using Client.WeatherService;
+using Client.Service_References.ExchangeService;
+using Client.Service_References.NotesService;
+using Client.Service_References.RbcService;
+using Client.Service_References.WeatherService;
 using Microsoft.Win32;
 using TotalContract;
 
 // Это для OpenFileDialog; 
 
-namespace Client
+namespace Client.View
 {
     /// <summary>
     ///     Логика взаимодействия для MainWindow.xaml
@@ -208,7 +208,7 @@ namespace Client
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void NotesRepository_Changed(object sender, EventArgs e)
+        private async void NotesRepository_Changed(object sender, System.EventArgs e)
         {
             using (var notesService = new NoteServiceContractClient())
             {

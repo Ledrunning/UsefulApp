@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UsefulApp.Localization.Attributes
+namespace Client.Attributes
 {
 	public class TranslatorCustomControlAttribute : Attribute
 	{

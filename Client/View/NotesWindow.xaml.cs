@@ -2,12 +2,11 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
-using Client.NotesService;
-using TotalContract;
+using Client.Service_References.NotesService;
 
 //using GeneralContract;
 
-namespace Client
+namespace Client.View
 {
     /// <summary>
     ///     Логика взаимодействия для Notes.xaml

@@ -1,6 +1,6 @@
-﻿using UsefulApp.Localization.Configuration;
+﻿using Client.Configuration;
 
-namespace UsefulApp.Localization.EventArgs
+namespace Client.EventArgs
 {
     public delegate void LanguageButtonEventHandler(object sender, LanguageEventArgs e);
 

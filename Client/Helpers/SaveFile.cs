@@ -1,9 +1,9 @@
 ﻿using System.IO;
 using System.Text;
-using Client.NotesService;
+using Client.Service_References.NotesService;
 using Microsoft.Win32;
 
-namespace Client
+namespace Client.Helpers
 {
     /// <summary>
     ///     Class for saving files and openfile dialog

@@ -1,4 +1,4 @@
-﻿namespace UsefulApp.Localization
+﻿namespace Client.Enums
 {
     public enum LocalizationType
     {

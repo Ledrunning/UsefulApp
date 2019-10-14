@@ -1,4 +1,6 @@
-﻿namespace UsefulApp.Localization.Configuration
+﻿using Client.Enums;
+
+namespace Client.Configuration
 {
     public class Language
     {

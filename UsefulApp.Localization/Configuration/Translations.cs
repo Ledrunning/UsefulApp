@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace UsefulApp.Localization.Configuration
+namespace Client.Configuration
 {
 	[XmlRoot("translations")]
 	public class Translations

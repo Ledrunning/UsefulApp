@@ -1,4 +1,4 @@
-﻿namespace UsefulApp.Localization
+﻿namespace Client.EventArgs
 {
     public class LanguageChangeEventArgs : System.EventArgs
     {

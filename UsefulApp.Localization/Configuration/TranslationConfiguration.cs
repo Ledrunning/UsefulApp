@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using Client.EventArgs;
 
-namespace UsefulApp.Localization.Configuration
+namespace Client.Configuration
 {
     public class TranslationConfiguration
     {
