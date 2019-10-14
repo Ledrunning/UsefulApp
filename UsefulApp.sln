@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExchangeService", "Exchange
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherService", "WetherService\WeatherService.csproj", "{FCB84E6B-7F7A-4603-B9D1-5BA551DD21E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoteService", "NodeService\NoteService.csproj", "{778FF925-DD00-4E22-8411-2E38F6C8EE0F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoteService", "NoteService\NoteService.csproj", "{778FF925-DD00-4E22-8411-2E38F6C8EE0F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TotalContract", "TotalContract\TotalContract.csproj", "{3DB915C8-2D22-4A9B-B6B8-2015F98E4A1C}"
 EndProject
