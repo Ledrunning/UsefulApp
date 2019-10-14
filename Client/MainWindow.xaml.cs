@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
 using Client.ExchangeService;
+using Client.Helpers;
 using Client.NotesService;
 using Client.RbcService;
 using Client.WeatherService;

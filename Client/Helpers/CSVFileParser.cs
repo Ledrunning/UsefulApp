@@ -1,9 +1,8 @@
 ﻿using System;
 using System.IO;
 using Client.NotesService;
-using TotalContract;
 
-namespace Client
+namespace Client.Helpers
 {
     internal class CSVFileParser
     {

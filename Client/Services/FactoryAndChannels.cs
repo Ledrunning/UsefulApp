@@ -1,7 +1,7 @@
 ﻿using System.ServiceModel;
 using TotalContract;
 
-namespace Client
+namespace Client.Services
 {
     /// <summary>
     ///     Class for creating service channels (deprecated)
